@@ -3,7 +3,7 @@
     "description": "Command line interface for adminetic admin panel.",
     "keywords": ["framework", "laravel", "laravel zero", "console", "cli"],
     "homepage": "https://github.com/pratiksh404/adminetic-cli",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "support": {
         "issues": "https://github.com/pratiksh404/adminetic-cli/issues",
