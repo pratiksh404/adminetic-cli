@@ -28,6 +28,14 @@ class MakeNewAdmineticProject extends Command
      */
     public function handle()
     {
+        $this->line("
+           ___     ___          _            _   _                 _ _
+          / _ \    | |         (_)          | | (_)               | (_)
+         / /_\ \ __| |_ __ ___  _ _ __   ___| |_ _  ___ ______ ___| |_ 
+         |  _  |/ _` | '_ ` _ \| | '_ \ / _ \ __| |/ __|______/ __| | |
+         | | | | (_| | | | | | | | | | |  __/ |_| | (__      | (__| | |
+         \_| |_/\__,_|_| |_| |_|_|_| |_|\___|\__|_|\___|      \___|_|_|                                                           
+        ");
         $name = $this->argument('name');
         $currentPath = getcwd();
         $validPath = str_replace("/", "\\", $currentPath);
@@ -43,29 +51,9 @@ class MakeNewAdmineticProject extends Command
             $process = shell_exec("cd $projectPath && composer require pratiksh/adminetic");
             return !empty($process);
         });
-        $database_created = $this->ask("Have you create database name $name ? (y/n)");
-        if ($database_created == 'y' || $database_created == 'Y') {
-            $this->task("Migrating Database Schema", function () use ($projectPath) {
-                $process = shell_exec("cd $projectPath && php artisan migrate");
-                return !empty($process);
-            });
-            $this->task("Replacing Route File and User Model", function () use ($projectPath) {
-                /* Deleting web.php and User.php */
-                file_exists($projectPath . '\routes\web.php') ? unlink($projectPath . '\routes\web.php') : '';
-                file_exists($projectPath . '\app/Models\User.php') ? unlink($projectPath . '\app\Models\User.php') : '';
-                /* Adminetic adminetic web.php and User.php */
-                file_put_contents($projectPath . '/routes/web.php', file_get_contents(__DIR__ . '/Stubs/web.stub'));
-                file_put_contents($projectPath . '/app/Models/User.php', file_get_contents(__DIR__ . '/Stubs/User.stub'));
-            });
-            $this->task("Installing Adminetic Admin Panel", function () use ($projectPath) {
-                $process = shell_exec("cd $projectPath && php artisan install:adminetic");
-                return !empty($process);
-            });
-            $this->task("Seeding Data", function () use ($projectPath) {
-                $process = shell_exec("cd $projectPath && php artisan adminetic:dummy");
-                return !empty($process);
-            });
-        }
+        $this->task("Install Adminetic Admin Panel", function () use ($name, $projectPath) {
+            $this->afterDBConffirmationProcess($this, $name, $projectPath);
+        });
         $this->info("Project created successfully ... ✅");
         $this->info("cd $name");
         $this->info("admin Credential");
@@ -75,14 +63,31 @@ class MakeNewAdmineticProject extends Command
         $this->notify("Adminetic Project Created Successfully", "Create something awesome ... 🎉", __DIR__ . '../../assets/logo.png');
     }
 
-    /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
-    public function schedule(Schedule $schedule): void
+    protected function afterDBConffirmationProcess(Command $command, $name, $projectPath)
     {
-        // $schedule->command(static::class)->everyMinute();
+        $database_created = $command->ask("Have you create database named $name ? (y/n)");
+        if ($database_created == 'y' || $database_created == 'Y') {
+            $command->task("Migrating Database Schema", function () use ($projectPath) {
+                $process = shell_exec("cd $projectPath && php artisan migrate");
+                return !empty($process);
+            });
+            $command->task("Replacing Route File and User Model", function () use ($projectPath) {
+                /* Deleting web.php and User.php */
+                file_exists($projectPath . '\routes\web.php') ? unlink($projectPath . '\routes\web.php') : '';
+                file_exists($projectPath . '\app/Models\User.php') ? unlink($projectPath . '\app\Models\User.php') : '';
+                /* Adminetic adminetic web.php and User.php */
+                file_put_contents($projectPath . '/routes/web.php', file_get_contents(__DIR__ . '/Stubs/web.stub'));
+                file_put_contents($projectPath . '/app/Models/User.php', file_get_contents(__DIR__ . '/Stubs/User.stub'));
+            });
+
+            shell_exec("cd $projectPath && php artisan install:adminetic");
+            $command->task("Seeding Data", function () use ($projectPath) {
+                $process = shell_exec("cd $projectPath && php artisan adminetic:dummy");
+                return !empty($process);
+            });
+        } else {
+            $command->info("Please create database named $name");
+            $this->afterDBConffirmationProcess($command, $name, $projectPath);
+        }
     }
 }
