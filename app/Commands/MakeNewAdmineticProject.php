@@ -2,7 +2,6 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class MakeNewAdmineticProject extends Command
@@ -38,51 +37,54 @@ class MakeNewAdmineticProject extends Command
         ");
         $name = $this->argument('name');
         $currentPath = getcwd();
-        $validPath = str_replace("/", "\\", $currentPath);
-        $projectPath = $validPath . "\\" . $name;
+        $validPath = str_replace('/', '\\', $currentPath);
+        $projectPath = $validPath.'\\'.$name;
         $this->info("Creating new adminetic project: $name ...");
         /* Downloading Laravel */
-        $this->task("Installing Laravel", function () use ($name) {
+        $this->task('Installing Laravel', function () use ($name) {
             $process = shell_exec("laravel new $name");
-            return !empty($process);
-        });
-        $this->task("Downloading Adminetic Admin Panel", function () use ($projectPath) {
 
-            $process = shell_exec("cd $projectPath && composer require pratiksh/adminetic");
             return !empty($process);
         });
-        $this->task("Install Adminetic Admin Panel", function () use ($name, $projectPath) {
+        $this->task('Downloading Adminetic Admin Panel', function () use ($projectPath) {
+            $process = shell_exec("cd $projectPath && composer require pratiksh/adminetic");
+
+            return !empty($process);
+        });
+        $this->task('Install Adminetic Admin Panel', function () use ($name, $projectPath) {
             $this->afterDBConffirmationProcess($this, $name, $projectPath);
         });
-        $this->info("Project created successfully ... ✅");
+        $this->info('Project created successfully ... ✅');
         $this->info("cd $name");
-        $this->info("admin Credential");
-        $this->info("email: admin@admin.com");
-        $this->info("password: admin123");
-        $this->info("Create something awesome ... 🎉");
-        $this->notify("Adminetic Project Created Successfully", "Create something awesome ... 🎉", __DIR__ . '../../assets/logo.png');
+        $this->info('admin Credential');
+        $this->info('email: admin@admin.com');
+        $this->info('password: admin123');
+        $this->info('Create something awesome ... 🎉');
+        $this->notify('Adminetic Project Created Successfully', 'Create something awesome ... 🎉', __DIR__.'../../assets/logo.png');
     }
 
     protected function afterDBConffirmationProcess(Command $command, $name, $projectPath)
     {
         $database_created = $command->ask("Have you create database named $name ? (y/n)");
         if ($database_created == 'y' || $database_created == 'Y') {
-            $command->task("Migrating Database Schema", function () use ($projectPath) {
+            $command->task('Migrating Database Schema', function () use ($projectPath) {
                 $process = shell_exec("cd $projectPath && php artisan migrate");
+
                 return !empty($process);
             });
-            $command->task("Replacing Route File and User Model", function () use ($projectPath) {
+            $command->task('Replacing Route File and User Model', function () use ($projectPath) {
                 /* Deleting web.php and User.php */
-                file_exists($projectPath . '\routes\web.php') ? unlink($projectPath . '\routes\web.php') : '';
-                file_exists($projectPath . '\app/Models\User.php') ? unlink($projectPath . '\app\Models\User.php') : '';
+                file_exists($projectPath.'\routes\web.php') ? unlink($projectPath.'\routes\web.php') : '';
+                file_exists($projectPath.'\app/Models\User.php') ? unlink($projectPath.'\app\Models\User.php') : '';
                 /* Adminetic adminetic web.php and User.php */
-                file_put_contents($projectPath . '/routes/web.php', file_get_contents(__DIR__ . '/Stubs/web.stub'));
-                file_put_contents($projectPath . '/app/Models/User.php', file_get_contents(__DIR__ . '/Stubs/User.stub'));
+                file_put_contents($projectPath.'/routes/web.php', file_get_contents(__DIR__.'/Stubs/web.stub'));
+                file_put_contents($projectPath.'/app/Models/User.php', file_get_contents(__DIR__.'/Stubs/User.stub'));
             });
 
             shell_exec("cd $projectPath && php artisan install:adminetic");
-            $command->task("Seeding Data", function () use ($projectPath) {
+            $command->task('Seeding Data', function () use ($projectPath) {
                 $process = shell_exec("cd $projectPath && php artisan adminetic:dummy");
+
                 return !empty($process);
             });
         } else {
