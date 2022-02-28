@@ -1,36 +1,56 @@
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" />
-</p>
+# adminetic-cli Admin Panel
 
-<p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://img.shields.io/github/workflow/status/laravel-zero/framework/Tests.svg" alt="Build Status"></img></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/dt/laravel-zero/framework.svg" alt="Total Downloads"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/v/laravel-zero/framework.svg?label=stable" alt="Latest Stable Version"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/l/laravel-zero/framework.svg" alt="License"></a>
-</p>
+![adminetic-cli](https://github.com/pratiksh404/adminetic-cli/blob/main/assets/banner.jpg)
 
-<h4> <center>This is a <bold>community project</bold> and not an official Laravel one </center></h4>
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/adminetic/cli.svg?style=flat-square)](https://packagist.org/packages/adminetic/cli)
+[![Stars](https://img.shields.io/github/stars/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/stargazers) [![Downloads](https://img.shields.io/packagist/dt/adminetic/cli.svg?style=flat-square)](https://packagist.org/packages/adminetic/cli) [![StyleCI](https://github.styleci.io/repos/464160031/shield?branch=main)](https://github.styleci.io/repos/464160031?branch=main) [![CodeFactor](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli/badge)](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli) [![License](https://img.shields.io/github/license/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/blob/main/LICENSE.md)
 
-Laravel Zero was created by, and is maintained by [Nuno Maduro](https://github.com/nunomaduro), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+Headstart your project with adminetic-cli admin panel with single command.
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
+For detailed documentaion visit [Adminetic-CLI Documentation](https://pratikdai404.gitbook.io/adminetic/services/cli)
 
-------
+## Installation
 
-## Documentation
+You can install the package via composer:
 
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
+```bash
+composer global require adminetic/cli
+```
 
-## Support the development
-**Do you like this project? Support it by donating**
+## Use
 
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
+```bash
+php adminetic new project_name
+```
+
+## Requirement
+
+-   PHP > 8.0
+-   [Laravel Installer](https://packagist.org/packages/laravel/installer)
+
+### Testing
+
+```bash
+composer test
+```
+
+### Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+### Security
+
+If you discover any security related issues, please email pratikdai404@gmail.com instead of using the issue tracker.
+
+## Credits
+
+-   [Pratik Shrestha](https://github.com/pratiksh)
+-   [All Contributors](../../contributors)
 
 ## License
 
-Laravel Zero is an open-source software licensed under the MIT license.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
