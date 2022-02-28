@@ -1,9 +1,9 @@
-# adminetic-cli Admin Panel
+# Adminetic Admin Panel CLI
 
 ![adminetic-cli](https://github.com/pratiksh404/adminetic-cli/blob/main/assets/banner.jpg)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/adminetic/cli.svg?style=flat-square)](https://packagist.org/packages/adminetic/cli)
-[![Stars](https://img.shields.io/github/stars/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/stargazers) [![Downloads](https://img.shields.io/packagist/dt/adminetic/cli.svg?style=flat-square)](https://packagist.org/packages/adminetic/cli) [![StyleCI](https://github.styleci.io/repos/464160031/shield?branch=main)](https://github.styleci.io/repos/464160031?branch=main) [![CodeFactor](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli/badge)](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli) [![License](https://img.shields.io/github/license/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/blob/main/LICENSE.md)
+[![Stars](https://img.shields.io/github/stars/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/stargazers) [![Downloads](https://img.shields.io/packagist/dt/adminetic/cli.svg?style=flat-square)](https://packagist.org/packages/adminetic/cli) [![StyleCI](https://github.styleci.io/repos/464160031/shield?branch=main)](https://github.styleci.io/repos/464160031?branch=main) [![CodeFactor](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli/badge)](https://www.codefactor.io/repository/github/pratiksh404/adminetic-cli) [![License](https://img.shields.io/github/license/pratiksh404/adminetic-cli)](https://github.com/pratiksh404/adminetic-cli/blob/main/LICENSE)
 
 Headstart your project with adminetic-cli admin panel with single command.
 
