@@ -42,7 +42,7 @@ class MakeNewAdmineticProject extends Command
         $this->info("Creating new adminetic project: $name ...");
         /* Downloading Laravel */
         $this->task('Installing Laravel', function () use ($name) {
-            $process = shell_exec("laravel new $name --branch=10.x");
+            $process = shell_exec("laravel new $name -q -n --branch=10.x");
 
             return !empty($process);
         });
